@@ -22,11 +22,19 @@ class ViewController: UIViewController, UISearchBarDelegate, WKUIDelegate {
         
         super.viewDidLoad()
         
+        self.view.backgroundColor = .white
+        
         setUpHeaderView()
         
         setUISearchController()
         
         setWebView()
+        
+        let myURL = URL(string: "https://www.apple.com")
+        
+        let myRequest = URLRequest(url: myURL!)
+        
+        self.webView.load(myRequest)
         
     }
     
@@ -42,7 +50,7 @@ class ViewController: UIViewController, UISearchBarDelegate, WKUIDelegate {
         
         headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         
-        headerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        headerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 64).isActive = true
         
         headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         
@@ -62,7 +70,7 @@ class ViewController: UIViewController, UISearchBarDelegate, WKUIDelegate {
         
         searchController.searchBar.sizeToFit()
         
-        self.view.addSubview(searchController.searchBar)
+        self.headerView.addSubview(searchController.searchBar)
         
     }
     
@@ -81,7 +89,7 @@ class ViewController: UIViewController, UISearchBarDelegate, WKUIDelegate {
         
         webView.uiDelegate = self
         
-        self.view.addSubview(webView)
+        self.headerView.addSubview(webView)
         
     }
     
