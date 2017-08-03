@@ -8,11 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController, UISearchResultsUpdating {
+import WebKit
+
+class ViewController: UIViewController, UISearchResultsUpdating, WKUIDelegate {
 
     var headerView: UIView!
     
     var searchController: UISearchController!
+    
+    var webView: WKWebView!
     
     override func viewDidLoad() {
         
@@ -21,6 +25,14 @@ class ViewController: UIViewController, UISearchResultsUpdating {
         setUpHeaderView()
         
         setUISearchController()
+        
+        setWebView()
+        
+        let myURL = URL(string: "https://www.apple.com")
+        
+        let myRequest = URLRequest(url: myURL!)
+        
+        webView.load(myRequest)
         
     }
     
@@ -59,6 +71,25 @@ class ViewController: UIViewController, UISearchResultsUpdating {
         searchController.searchBar.frame.origin.y = 20
         
         self.view.addSubview(searchController.searchBar)
+        
+    }
+    
+    func setWebView() {
+        
+        let webConfiguration = WKWebViewConfiguration()
+        
+        webView = WKWebView(
+            frame: .init(
+                x: 0,
+                y: 64,
+                width: self.view.frame.width,
+                height: self.view.frame.height - 64),
+            configuration: webConfiguration
+        )
+        
+        webView.uiDelegate = self
+        
+        self.view.addSubview(webView)
         
     }
     
