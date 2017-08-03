@@ -8,15 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchResultsUpdating {
 
     var headerView: UIView!
+    
+    var searchController: UISearchController!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         setUpHeaderView()
+        
+        setUISearchController()
         
     }
     
@@ -40,6 +44,27 @@ class ViewController: UIViewController {
         
     }
 
+    func setUISearchController() {
+        
+        searchController = UISearchController(searchResultsController: nil)
+        
+        searchController.searchResultsUpdater = self
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        searchController.searchBar.searchBarStyle = .prominent
+        
+        searchController.searchBar.sizeToFit()
+        
+        searchController.searchBar.frame.origin.y = 20
+        
+        self.view.addSubview(searchController.searchBar)
+        
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
 
 }
 
