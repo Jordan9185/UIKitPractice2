@@ -10,14 +10,34 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var headerView: UIView!
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        setUpHeaderView()
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func setUpHeaderView() {
+        
+        headerView = UIView()
+        
+        headerView.backgroundColor = .white
+        
+        self.view.addSubview(headerView)
+        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        
+        headerView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        
+        headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        
+        headerView.heightAnchor.constraint(equalTo:self.view.heightAnchor).isActive = true
+        
     }
 
 
