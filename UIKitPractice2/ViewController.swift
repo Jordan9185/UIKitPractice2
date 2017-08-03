@@ -10,7 +10,7 @@ import UIKit
 
 import WebKit
 
-class ViewController: UIViewController, UISearchResultsUpdating, WKUIDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, WKUIDelegate {
 
     var headerView: UIView!
     
@@ -27,12 +27,6 @@ class ViewController: UIViewController, UISearchResultsUpdating, WKUIDelegate {
         setUISearchController()
         
         setWebView()
-        
-        let myURL = URL(string: "https://www.apple.com")
-        
-        let myRequest = URLRequest(url: myURL!)
-        
-        webView.load(myRequest)
         
     }
     
@@ -60,15 +54,13 @@ class ViewController: UIViewController, UISearchResultsUpdating, WKUIDelegate {
         
         searchController = UISearchController(searchResultsController: nil)
         
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         
         searchController.dimsBackgroundDuringPresentation = false
         
         searchController.searchBar.searchBarStyle = .prominent
         
         searchController.searchBar.sizeToFit()
-        
-        searchController.searchBar.frame.origin.y = 20
         
         self.view.addSubview(searchController.searchBar)
         
@@ -81,9 +73,9 @@ class ViewController: UIViewController, UISearchResultsUpdating, WKUIDelegate {
         webView = WKWebView(
             frame: .init(
                 x: 0,
-                y: 64,
+                y: 44,
                 width: self.view.frame.width,
-                height: self.view.frame.height - 64),
+                height: self.view.frame.height - 44),
             configuration: webConfiguration
         )
         
@@ -93,8 +85,14 @@ class ViewController: UIViewController, UISearchResultsUpdating, WKUIDelegate {
         
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        let myURL = URL(string: searchBar.text!)
+        
+        let myRequest = URLRequest(url: myURL!)
+        
+        self.webView.load(myRequest)
+
     }
 
 }
